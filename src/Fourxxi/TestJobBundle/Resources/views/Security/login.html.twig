@@ -1,0 +1,32 @@
+{% extends "FourxxiTestJobBundle:Default:base.html.twig" %}
+
+{% block title %}
+    Signin
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- Custom styles for this template -->
+    <link href="{{asset('bundles/fourxxitestjob/css/login.css')}}" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        {% if error %}
+            <div class="alert alert-warning" role="alert">
+                {{ error.message }}
+            </div>
+        {% endif %}
+        <form action="{{ path('login_check') }}" method="post" class="form-signin" role="form">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <label for="username" class="sr-only">Email address</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="User" required autofocus>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="_password" class="form-control" placeholder="Password" required>
+            <input type="hidden" name="_target_path" value="/" />
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+    </div>
+{% endblock %}
