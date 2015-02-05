@@ -49,6 +49,12 @@ class User implements UserInterface, \Serializable {
      * @ORM\Column(name="lastName", type="string", length=255)
      */
     private $lastName;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="user")
+     */
+    private $messages;
+
 
     /**
      * @inheritDoc
@@ -188,4 +194,44 @@ class User implements UserInterface, \Serializable {
         return $this->lastName;
     }
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->messages = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add messages
+     *
+     * @param \Fourxxi\TestJobBundle\Entity\Message $messages
+     * @return User
+     */
+    public function addMessage(\Fourxxi\TestJobBundle\Entity\Message $messages)
+    {
+        $this->messages[] = $messages;
+
+        return $this;
+    }
+
+    /**
+     * Remove messages
+     *
+     * @param \Fourxxi\TestJobBundle\Entity\Message $messages
+     */
+    public function removeMessage(\Fourxxi\TestJobBundle\Entity\Message $messages)
+    {
+        $this->messages->removeElement($messages);
+    }
+
+    /**
+     * Get messages
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMessages()
+    {
+        return $this->messages;
+    }
 }

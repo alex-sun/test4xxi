@@ -9,11 +9,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/hello/{name}")
+     * @Route("/")
      * @Template()
      */
-    public function indexAction($name)
+    public function indexAction()
     {
-        return array('name' => $name);
+        $doctrine = $this->getDoctrine();
+        $users = $doctrine->getRepository('FourxxiTestJobBundle:User')->findAll();
+        return $this->render('FourxxiTestJobBundle:Default:index.html.twig',array(
+            'users' => $users
+        ));
     }
 }
