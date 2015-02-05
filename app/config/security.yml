@@ -1,16 +1,10 @@
 security:
     providers:
-        in_memory:
-            memory:
-                users:
-                    ryan:
-                        password: ryanpass
-                        roles: 'ROLE_USER'
-                    admin:
-                        password: 1111
-                        roles: 'ROLE_USER'
+        administrators:
+            entity: { class: FourxxiTestJobBundle:User, property: username }
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
+        Fourxxi\TestJobBundle\Entity\User: plaintext
 
     firewalls:
         dev:
