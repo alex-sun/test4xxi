@@ -1,3 +1,8 @@
+fourxxi_test_job:
+    resource: "@FourxxiTestJobBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 app:
     resource: @AppBundle/Controller/
     type:     annotation
