@@ -1,0 +1,9 @@
+<div class="messagediv" data-messageid="{{message.id}}">
+    <p id="messagebody-{{message.id}}">{{message.body}}
+    </p>
+    {% if usersid == message.user.id %}
+        <div onClick="editMessage({{message.id}});" class="message btn btn-default btn-sm" href="#" role="button">Edit</div>
+    {% endif %}
+    <span> author: {{message.user.firstName}}&nbsp;{{message.user.lastName}} 
+    </span>
+</div>

@@ -19,19 +19,18 @@
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div id="messages">
+                {% for message in messages %}
+                    {% embed "FourxxiTestJobBundle:Default:message.html.twig" %}
+                    {% endembed %}
+                {% endfor %}
+            </div>
 
-            {% for message in messages %}
-                <div class="messagediv">
-                    <p>{{message.body}}</p>
-                    <p><div class="btn btn-default btn-sm" href="#" role="button">Edit</div></p>
-                    <span>author: {{message.user.firstName}}&nbsp;{{message.user.lastName}}</span>
-                </div>
-            {% endfor %}
-
-            <div class="messagediv form-inline">
-                <textarea rows="5"></textarea>
-                <div type="button" class="btn btn-primary btn-sm">Save</div>
-                <span>New message</span>
+            <div id="editform" class="messagediv form-inline">
+                <textarea id="body" rows="5"></textarea>
+                <div id="save" class="btn btn-primary btn-sm">Update</div>
+                <div id="savenew" class="btn btn-primary btn-sm">Create new</div>
+                <span></span>
             </div>
         </div>
 
