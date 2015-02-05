@@ -3,6 +3,10 @@
     {{ parent() }}
     <link href="{{asset('bundles/fourxxitestjob/css/index.css')}}" rel="stylesheet">
 {% endblock %}
+{% block script %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{asset('bundles/fourxxitestjob/js/index.js')}}"></script>
+{% endblock %}
 {% block content %}
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
@@ -16,18 +20,19 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
+            {% for message in messages %}
+                <div class="messagediv">
+                    <p>message</p>
+                    <p><div class="btn btn-default btn-sm" href="#" role="button">Edit</div></p>
+                    <span>author: {{message.user.firstName}}&nbsp;{{message.user.lastName}}</span>
+                </div>
+            {% endfor %}
 
-            <div class="messagediv">
-                <p>message</p>
-                <p><a class="btn btn-default btn-sm" href="#" role="button">Edit</a></p>
-                <span>author: Sun</span>
-            </div>
-
-            <form class="messagediv form-inline">
+            <div class="messagediv form-inline">
                 <textarea rows="5"></textarea>
-                <button type="button" class="btn btn-primary btn-sm">Save</button>
+                <div type="button" class="btn btn-primary btn-sm">Save</div>
                 <span>New message</span>
-            </form>
+            </div>
         </div>
 
     </div>

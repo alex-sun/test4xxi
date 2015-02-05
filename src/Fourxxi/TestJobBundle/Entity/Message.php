@@ -22,13 +22,6 @@ class Message
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="author", type="integer")
-     */
-    private $author;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="body", type="text")
@@ -39,7 +32,7 @@ class Message
      * @ORM\ManyToOne(targetEntity="User", inversedBy="messages")
      * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
      */
-    protected $work;
+    protected $user;
 
 
 
@@ -51,29 +44,6 @@ class Message
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set author
-     *
-     * @param integer $author
-     * @return Message
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return integer 
-     */
-    public function getAuthor()
-    {
-        return $this->author;
     }
 
     /**
@@ -100,25 +70,25 @@ class Message
     }
 
     /**
-     * Set work
+     * Set user
      *
-     * @param \Fourxxi\TestJobBundle\Entity\User $work
+     * @param \Fourxxi\TestJobBundle\Entity\User $user
      * @return Message
      */
-    public function setWork(\Fourxxi\TestJobBundle\Entity\User $work)
+    public function setUser(\Fourxxi\TestJobBundle\Entity\User $user)
     {
-        $this->work = $work;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get work
+     * Get user
      *
      * @return \Fourxxi\TestJobBundle\Entity\User 
      */
-    public function getWork()
+    public function getUser()
     {
-        return $this->work;
+        return $this->user;
     }
 }

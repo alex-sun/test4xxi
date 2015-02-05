@@ -16,8 +16,10 @@ class DefaultController extends Controller
     {
         $doctrine = $this->getDoctrine();
         $users = $doctrine->getRepository('FourxxiTestJobBundle:User')->findAll();
+        $messages = $doctrine->getRepository('FourxxiTestJobBundle:Message')->findAll();
         return $this->render('FourxxiTestJobBundle:Default:index.html.twig',array(
-            'users' => $users
+            'users' => $users,
+            'messages' => $messages
         ));
     }
 }
