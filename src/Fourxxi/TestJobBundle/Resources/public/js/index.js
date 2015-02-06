@@ -5,17 +5,16 @@ $(function () {
     $('#save').click(function () {
         saveMessage(messageId);
     });
-    $('#savenew').click(function () {
-        saveMessage(null);
-    });
 });
 
 
 
-function newMessage() {    
-    $('#editform').css({display: 'block'});
+function newMessage() {
+    messageId = null;
     $('#editform>textarea').focus();
     $('#editform>span').html('New message');
+    $('#editform').css({display: 'block'});
+    $('#body').val('');
 }
 function editMessage(msgId, afterUpdate) {
     messageId = msgId;
@@ -24,7 +23,7 @@ function editMessage(msgId, afterUpdate) {
         $('#editform>textarea').val($('#messagebody-' + messageId).text());
         $('#editform>textarea').focus();
     }
-    $('#save').css({display: 'inline-block'});
+    $('#editform').css({display: 'block'});
 }
 
 function saveMessage(msgId) {
@@ -39,11 +38,8 @@ function saveMessage(msgId) {
         } else {
             newdiv = $(data);
             $('#messages').append(newdiv);
-            msgId = newdiv.attr('data-messageid');
-            editMessage(msgId, true);
         }
-//        $('#save').css({display: 'none'});
-//        $('#editform>span').html('New message');
     });
+    $('#editform').css({display: 'none'});
     messageId = null;
 }

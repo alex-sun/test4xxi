@@ -1,6 +1,5 @@
 <div class="messagediv" data-messageid="{{message.id}}">
-    <p id="messagebody-{{message.id}}">{{message.body}}
-    </p>
+    <p id="messagebody-{{message.id}}">{{message.body|nl2br}}</p>
     {% if usersid == message.user.id %}
         <div onClick="editMessage({{message.id}});" class="message btn btn-default btn-sm" href="#" role="button">Edit</div>
     {% endif %}
