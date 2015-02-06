@@ -48,6 +48,9 @@ class DefaultController extends Controller {
         }
         if ($id) {
             $message = $repo->find($id);
+            if ($message->getUser()->getId() !== $user->getId()) {
+                throw $this->createAccessDeniedException('Access denied');
+            }
         } else {
             $message = new Message();
             $message->setUser($user);
