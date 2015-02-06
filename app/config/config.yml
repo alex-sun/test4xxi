@@ -71,3 +71,18 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+hwi_oauth:
+    # name of the firewall in which this bundle is active, this setting MUST be set
+    firewall_name: secured_area
+    resource_owners:
+        facebook:
+            type:                facebook
+            client_id:           834715343234258
+            client_secret:       e667113df331b8a9a96a7334ca3bd73d
+            options:
+                display: popup #dialog is optimized for popup window
+                
+services:
+    hwi_oauth.user.provider.entity:
+        class: Fourxxi\TestJobBundle\User\OAuthUserProvider

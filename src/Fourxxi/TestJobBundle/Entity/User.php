@@ -21,6 +21,12 @@ class User implements UserInterface, \Serializable {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fb_id", type="bigint", nullable=true)
+     */
+    private $fbId;
 
     /**
      * @var string
@@ -32,7 +38,7 @@ class User implements UserInterface, \Serializable {
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=255)
+     * @ORM\Column(name="password", type="string", length=255, nullable=true)
      */
     private $password;
 
@@ -233,5 +239,28 @@ class User implements UserInterface, \Serializable {
     public function getMessages()
     {
         return $this->messages;
+    }
+
+    /**
+     * Set fbId
+     *
+     * @param integer $fbId
+     * @return User
+     */
+    public function setFbId($fbId)
+    {
+        $this->fbId = $fbId;
+
+        return $this;
+    }
+
+    /**
+     * Get fbId
+     *
+     * @return integer 
+     */
+    public function getFbId()
+    {
+        return $this->fbId;
     }
 }

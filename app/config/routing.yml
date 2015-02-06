@@ -6,3 +6,10 @@ fourxxi_test_job:
 app:
     resource: @AppBundle/Controller/
     type:     annotation
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+facebook_login:
+    pattern: /login/check-facebook

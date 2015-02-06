@@ -26,6 +26,10 @@
             <input type="hidden" name="_target_path" value="/" />
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <br>
+            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook'}) }}">
+                <div class="btn btn-lg btn-primary btn-block" type="submit">Login with Facebook</div>
+            </a>
         </form>
     </div>
 {% endblock %}
