@@ -2,9 +2,8 @@
 var messageId = null;
 
 $(function () {
-    $('#save').click(function () {
-        saveMessage(messageId);
-    });
+    if (window.location.hash === '#comment')
+        newMessage();
 });
 
 
@@ -23,20 +22,19 @@ function editMessage(msgId) {
     $('#editform>textarea').focus();
 }
 
-function saveMessage(msgId) {
+function saveMessage() {
     var data = {};
-    if (msgId) {
-        data.id = msgId;
+    if (messageId) {
+        data.id = messageId;
     }
     data.body = $('#body').val();
     $.post("message", data).done(function (data) {
-        if (msgId) {
-            $('.messagediv[data-messageid=' + msgId + ']').replaceWith(data);
+        if (messageId) {
+            $('.messagediv[data-messageid=' + messageId + ']').replaceWith(data);
         } else {
             newdiv = $(data);
             $('#messages').append(newdiv);
         }
     });
     $('#editform').css({display: 'none'});
-    messageId = null;
 }

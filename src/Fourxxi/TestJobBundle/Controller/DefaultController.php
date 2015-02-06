@@ -13,23 +13,23 @@ class DefaultController extends Controller {
 
     /**
      * @Route("/", name="home")
-     * @Template()
+     * @Template("FourxxiTestJobBundle:Default:index.html.twig")
      */
     public function indexAction() {
         $doctrine = $this->getDoctrine();
         $users = $doctrine->getRepository('FourxxiTestJobBundle:User')->findAll();
         $curentUserId = $this->getUser()->getId();
         $messages = $doctrine->getRepository('FourxxiTestJobBundle:Message')->findAll();
-        return $this->render('FourxxiTestJobBundle:Default:index.html.twig', array(
-                    'users' => $users,
-                    'usersid' => $curentUserId,
-                    'messages' => $messages
-        ));
+        return array(
+            'users' => $users,
+            'usersid' => $curentUserId,
+            'messages' => $messages
+        );
     }
 
     /**
      * @Route("/message")
-     * @Template()
+     * @Template("FourxxiTestJobBundle:Default:message.html.twig")
      */
     public function messageAction(Request $request) {
         $doctrine = $this->getDoctrine();
@@ -37,7 +37,7 @@ class DefaultController extends Controller {
         $repo = $doctrine->getRepository('FourxxiTestJobBundle:Message');
         $user = $this->getUser();
         $curentUserId = $user->getId();
-        
+
         if ($request->getMethod() !== 'POST') {
             throw $this->createNotFoundException('POST data not found');
         }
@@ -55,11 +55,42 @@ class DefaultController extends Controller {
         $message->setBody($body);
         $em->persist($message);
         $em->flush();
-        return $this->render('FourxxiTestJobBundle:Default:message.html.twig', array(
-                    'usersid' => $curentUserId,
-                    'message' => $message
-        ));
+        return array(
+            'usersid' => $curentUserId,
+            'message' => $message
+        );
+    }
 
+    /**
+     * @Route("/profile", name="profile")
+     * @Template("FourxxiTestJobBundle:Default:profile.html.twig")
+     */
+    public function profileAction(Request $request) {
+        $user = $this->getUser();
+        $form = $this->createFormBuilder($user)
+                ->add('firstName', null, array(
+                    'attr' => array(
+                        'class' => 'form-control'
+                    )
+                ))
+                ->add('lastName', null, array(
+                    'attr' => array(
+                        'class' => 'form-control'
+                    )
+                ))
+                ->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+            return $this->redirect($this->generateUrl('home'));
+        }
+
+        return array(
+            'form' => $form->createView(),
+        );
     }
 
 }
