@@ -8,22 +8,19 @@ $(function () {
 });
 
 
-
 function newMessage() {
     messageId = null;
-    $('#editform>textarea').focus();
     $('#editform>span').html('New message');
+    $('#editform>textarea').val('');
     $('#editform').css({display: 'block'});
-    $('#body').val('');
+    $('#editform>textarea').focus();
 }
-function editMessage(msgId, afterUpdate) {
+function editMessage(msgId) {
     messageId = msgId;
     $('#editform>span').html('Edit message #' + messageId);
-    if (!afterUpdate) {
-        $('#editform>textarea').val($('#messagebody-' + messageId).text());
-        $('#editform>textarea').focus();
-    }
+    $('#editform>textarea').val($('#messagebody-' + messageId).text());
     $('#editform').css({display: 'block'});
+    $('#editform>textarea').focus();
 }
 
 function saveMessage(msgId) {
