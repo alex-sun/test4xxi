@@ -11,9 +11,15 @@ security:
             pattern: ^/(_(profiler|wdt|error)|css|images|js)/
             security: false
 
-        default:
+        secured_area:
             anonymous: ~
             http_basic: ~
             form_login:
                 login_path: /login
                 check_path: /login_check
+            logout:
+                path:   /logout
+                target: /
+    access_control:
+        - { path: ^/login,          roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/,               roles: IS_AUTHENTICATED_FULLY }
