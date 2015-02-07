@@ -5,6 +5,8 @@ namespace Fourxxi\TestJobBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Fourxxi\TestJobBundle\Entity\User;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class SecurityController extends Controller {
 
@@ -38,6 +40,28 @@ class SecurityController extends Controller {
      */
     public function loginCheckAction() {
         
+    }
+
+    /**
+     * @Route("/newuser", name="newuser")
+     */
+    public function newUserAction(Request $request) {
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+
+        $newuser = new User();
+        $newuser->setUsername($this->get('request')->request->get('_username'));
+        $newuser->setPassword($this->get('request')->request->get('_password'));
+        $newuser->setFirstName($this->get('request')->request->get('firstName'));
+        $newuser->setLastName($this->get('request')->request->get('lastName'));
+        $em->persist($newuser);
+        $em->flush();
+
+        $token = new UsernamePasswordToken($newuser, $newuser->getPassword(), "secured_area", $newuser->getRoles());
+        $securityContext = $this->container->get('security.context');
+        $securityContext->setToken($token);
+
+        return $this->redirect($this->generateUrl('home'));
     }
 
 }

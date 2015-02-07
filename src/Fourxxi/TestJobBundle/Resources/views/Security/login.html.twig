@@ -9,6 +9,10 @@
     <link href="{{asset('bundles/fourxxitestjob/css/login.css')}}" rel="stylesheet">
 {% endblock %}
 
+{% block script %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{asset('bundles/fourxxitestjob/js/login.js')}}"></script>
+{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -17,7 +21,7 @@
                 {{ error.message }}
             </div>
         {% endif %}
-        <form action="{{ path('login_check') }}" method="post" class="form-signin" role="form">
+        <form action="" method="post" class="form-signin" role="form">
             <h2 class="form-signin-heading">Please sign in</h2>
             <label for="username" class="sr-only">Email address</label>
             <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="User" required autofocus>
@@ -25,6 +29,13 @@
             <input type="password" id="password" name="_password" class="form-control" placeholder="Password" required>
             <input type="hidden" name="_target_path" value="/" />
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="newuser" value="newuser"> New user
+                </label>
+            </div> 
+            <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First name">
+            <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last name">
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
             <br>
             <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook'}) }}">
