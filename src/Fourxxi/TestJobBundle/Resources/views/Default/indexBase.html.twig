@@ -15,7 +15,7 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{ path('profile') }}">Profile</a></li>
-                    <li><a {%if app.request.attributes.get('_route')=="home"%}onclick="newMessage();"{% endif %} href="{{ path('home') }}#comment">Comment</a></li>
+                    <li><a {%if app.request.attributes.get('_route')=="home"%}onclick="newMessage();"{% endif %} href="{{ path('home') }}#comment">New message</a></li>
                     <li><a href="{{ path('logout') }}">Logout</a></li>
                 </ul>
             </div>
